@@ -1,0 +1,1 @@
+This is a study of software engineering,according to the course of teaching do a menu Mini Programs,C language implementation,the implementation of software engineering ideas,after learning more harvest!(digital soldier 17 November 2018)
