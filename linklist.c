@@ -15,52 +15,36 @@
  * Created by shuzixb,2018/11/16
  */
 
+
+/* data struct and its operations */
+
 #include"linklist.h"
 
-int Help();
-int Quit();
-
-#define CMD_MAX_LEN 128
-#define DESC_LEN    1024
-#define CMD_num     10
-
-
-/* menu program */
-
-static tDataNode head[]=
+tDataNode* FindCmd(tDataNode *head,char *cmd)
 {
-    {"help","this is help cmd",Help,&head[1]},
-    {"quit","Quit from the program!",Quit,&head[2]},
-    {"version","menu program v1.0",NULL,NULL}
-};
-
-
-int main(void)
-{
-    /* cmd line begins */
-    while(1)
+    if(head==NULL||cmd==NULL)
     {
-	char cmd[CMD_MAX_LEN];
-	printf("Input a cmd number >");
-	scanf("%s",cmd);
-	tDataNode *p=FindCmd(head,cmd);
-	if(p==NULL)
-	{
-	    printf("This is a wrong cmd!\n");
-	    continue;
-	}
-	printf("%s - %s\n",p->cmd,p->desc);
-	if(p->handler !=NULL)
-	    p->handler();
+        return NULL;
     }
+    tDataNode *p=head;
+    while(p!=NULL)
+    {
+        if(!strcmp(p->cmd,cmd))
+            return p;
+	p=p->next;
+    }
+    return NULL;
 }
 
-int Help()
+int ShowAllCmd(tDataNode *head)
 {
-    ShowAllCmd(head);
+    printf("Menu List:\n");
+    tDataNode *p=head;
+    while(p!=NULL)
+    {
+        printf("%s - %s\n",p->cmd,p->desc);
+	p=p->next;
+    }
+    return 0;
 }
 
-int Quit()
-{
-    exit(0);
-}
