@@ -4,7 +4,7 @@
 #include<pthread.h>
 
 #define SUCCESS 0
-#
+#define FAILURE (-1)
 
 /* LinkTable Node Type */
 typedef struct LinkTableNode
@@ -17,9 +17,8 @@ typedef struct LinkTableNode
 typedef struct LinkTable
 {
     tLinkTableNode *pHead;
-    tLinktableNode *pTail;
+    tLinkTableNode *pTail;
     int        sumOfNode;
-    pthread_mutex_t mutex;
 }tLinkTable;
 
 /* Create a LinkTable */
@@ -29,7 +28,7 @@ tLinkTable *CreateLinkTable();
 int DeleteLinkTable(tLinkTable *pLinkTable);
 
 /* Add a LinkTableNode to LinkTable */
-int AddLinkTableNode(tLinkTabel *pLinkTable,tLinkTableNode *pNode);
+int AddLinkTableNode(tLinkTable *pLinkTable,tLinkTableNode *pNode);
 
 /* Delete a LinkTableNode from LinkTable */
 int DelLinkTableNode(tLinkTable *pLinkTable,tLinkTableNode *pNode);
