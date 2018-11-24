@@ -23,6 +23,7 @@
 #define DESC_LEN    1024
 #define CMD_num     10
 
+
 typedef struct DataNode
 {
     tLinkTableNode *pNext;
@@ -31,6 +32,7 @@ typedef struct DataNode
     int (*handler)();
 }tDataNode;
 
+/*
 tDataNode *FindCmd(tLinkTable *head,char *cmd)
 {
     tDataNode *pNode=(tDataNode*)GetLinkTableHead(head);
@@ -41,6 +43,16 @@ tDataNode *FindCmd(tLinkTable *head,char *cmd)
 	 pNode=(tDataNode*)GetNextLinkTableNode(head,(tLinkTableNode*)pNode);
     }
     return NULL;
+}
+*/
+
+int SearchCondition(tLinkTableNode * pLinkTableNode,void * args)
+{
+    char * cmd=(char*)args;
+    tDataNode* pNode=(tDataNode*)pLinkTableNode;
+    if(strcmp(pNode->cmd,cmd)==0)
+        return SUCCESS;
+    return FAILURE;
 }
 
 int Help();
@@ -87,13 +99,13 @@ tLinkTable *head=NULL;
 
 int main()
 {
-    InitMenuData(&head);
     char cmd[CMD_MAX_LEN];
+    InitMenuData(&head);
     while(1)
     {
         printf("Input a cmd number >");
 	scanf("%s",cmd);
-	tDataNode *p=FindCmd(head,cmd);
+	tDataNode *p=(tDataNode*)SearchLinkTableNode(head,SearchCondition,(void*)cmd);
 	if(p==NULL)
 	{
             printf("This is a wrong cmd!\n");
@@ -121,4 +133,5 @@ int Help()
 int Quit()
 {
     exit(0);
+    return 0;
 }

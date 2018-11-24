@@ -39,4 +39,6 @@ tLinkTableNode * GetLinkTableHead(tLinkTable *pLinkTable);
 /* get next LinkTableNode */
 tLinkTableNode * GetNextLinkTableNode(tLinkTable *pLinkTable,tLinkTableNode *pNode);
 
+/* search a LinkTableNode from LinkTable */
+tLinkTableNode *SearchLinkTableNode(tLinkTable *pLinkTable,int Conditon(tLinkTableNode *pNode,void* args),void* args);
 #endif /* _LINK_TABLE_H_ */
